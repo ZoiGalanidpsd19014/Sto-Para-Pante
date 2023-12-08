@@ -1,14 +1,20 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     float horizontalInput;
-    float moveSpeed = 10f;
+    float moveSpeed = 12f;
     bool isFacingRight = false;
-    float jumpPower = 11f;
+    float jumpPower = 9f;
     bool isGrounded = false;
-    bool doubleJump;
+    int jumpsLeft;
+    public int maxJumps = 2;
+    public Vector3 respawnPoint;
+    public GameObject fallDetector;
+ 
 
     Rigidbody2D rb;
     Animator animator;
@@ -18,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        respawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -32,17 +39,19 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isGrounded = false;
             animator.SetBool("isJumping", !isGrounded);
+            jumpsLeft = maxJumps;
         }
 
-        if(Input.GetButtonDown("Jump") && !isGrounded)
+        if (Input.GetButtonDown("Jump") && jumpsLeft>0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            isGrounded = false;
-            doubleJump = true;
+            jumpsLeft -= 1;
             animator.SetBool("isJumping", !isGrounded);
         }
 
-        
+        fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.position.y);
+
+       
     }
 
     private void FixedUpdate()
@@ -67,5 +76,40 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = true;
         animator.SetBool("isJumping", !isGrounded);
+
+        if(collision.tag == "FallDetector")
+        {
+            transform.position = respawnPoint;
+        }
+
+        if (collision.gameObject.tag == "Points") 
+            Destroy(collision.gameObject);
+        
     }
-}
+    
+    }
+
+    
+
+/*public class FishShooting : MonoBehaviour
+{
+    public GameObject myBubble;
+    public float speed = 10;
+    public float fireSpeed = 20;
+    public Transform ballspawnPoint;
+    void Update()
+    {
+        transform.Translate(
+        Input.GetAxis("Horizontal") * speed * Time.deltaTime,
+        Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject newBullet = Instantiate(myBubble,
+            ballspawnPoint.position, ballspawnPoint.rotation);
+            Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
+            rb.velocity += (Vector2)transform.right * fireSpeed;
+        }
+    }
+}*/
+
+
