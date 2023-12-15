@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;
     public Vector3 respawnPoint;
     public GameObject fallDetector;
- 
+
 
     Rigidbody2D rb;
     Animator animator;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSprite();
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isGrounded = false;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             jumpsLeft = maxJumps;
         }
 
-        if (Input.GetButtonDown("Jump") && jumpsLeft>0)
+        if (Input.GetButtonDown("Jump") && jumpsLeft > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             jumpsLeft -= 1;
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.position.y);
 
-       
+
     }
 
     private void FixedUpdate()
@@ -59,11 +59,16 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
         animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
         animator.SetFloat("yVelocity", rb.velocity.y);
+
+        if (GameManager.instance.myState != GameManager.State.playing) return;
+        Vector2 v = rb.velocity;
+        v.x = Input.GetAxis("Horizontal") * moveSpeed;
+        rb.velocity = v;
     }
 
     void FlipSprite()
     {
-        if(isFacingRight && horizontalInput > 0f || !isFacingRight && horizontalInput < 0f)
+        if (isFacingRight && horizontalInput > 0f || !isFacingRight && horizontalInput < 0f)
         {
             isFacingRight = !isFacingRight;
             Vector3 ls = transform.localScale;
@@ -77,17 +82,20 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = true;
         animator.SetBool("isJumping", !isGrounded);
 
-        if(collision.tag == "FallDetector")
+        if (collision.tag == "fallDetector")
         {
             transform.position = respawnPoint;
         }
 
-        if (collision.gameObject.tag == "Points") 
+        if (collision.gameObject.tag == "collectable")
+        {
             Destroy(collision.gameObject);
-        
+            GameManager.instance.IncreaseScore(10);
+
+        }
+
     }
-    
-    }
+}
 
     
 
