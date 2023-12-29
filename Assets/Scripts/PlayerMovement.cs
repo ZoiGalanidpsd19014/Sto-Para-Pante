@@ -97,27 +97,6 @@ public class PlayerMovement : MonoBehaviour
     }
 }
 
-    
 
-/*public class FishShooting : MonoBehaviour
-{
-    public GameObject myBubble;
-    public float speed = 10;
-    public float fireSpeed = 20;
-    public Transform ballspawnPoint;
-    void Update()
-    {
-        transform.Translate(
-        Input.GetAxis("Horizontal") * speed * Time.deltaTime,
-        Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
-        if (Input.GetButtonDown("Fire1"))
-        {
-            GameObject newBullet = Instantiate(myBubble,
-            ballspawnPoint.position, ballspawnPoint.rotation);
-            Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
-            rb.velocity += (Vector2)transform.right * fireSpeed;
-        }
-    }
-}*/
 
 

@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
+        
     }
 
     void Attack()
@@ -28,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
            
         }
+        
     }
 
     private void OnDrawGizmosSelected()
