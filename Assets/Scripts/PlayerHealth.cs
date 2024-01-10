@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth -= damage;
+            Debug.Log("player took damage");
 
 
         }
@@ -49,6 +50,9 @@ public class PlayerHealth : MonoBehaviour
     {
         animator.SetBool("isLiving", !isDead);
         transform.position = respawnPoint;
+        currentHealth = maxHealth;
+        Debug.Log("Full lives");
+        
         
     }
 }

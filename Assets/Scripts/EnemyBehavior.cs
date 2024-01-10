@@ -6,20 +6,14 @@ public class EnemyBehavior : MonoBehaviour {
     // Start is called before the first frame update
     public bool moving = false;
     Rigidbody2D rb;
-    public float speed = -1;
+    
     
     void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void FixedUpdate() 
-    {
-        if (moving) {
-            rb.velocity = new Vector2(speed, 0);
-        }
-        
-    }
+   
 
     public GameObject sprite;
     public void FlipSprite()
@@ -34,7 +28,7 @@ public class EnemyBehavior : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Enemy")
         {
             FlipThisSprite();
         }
