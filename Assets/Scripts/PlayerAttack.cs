@@ -17,7 +17,12 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
-        
+        if (Input.GetMouseButtonDown(1))
+        {
+            Attack2();
+        }
+
+
     }
 
     void Attack()
@@ -30,7 +35,16 @@ public class PlayerAttack : MonoBehaviour
            
         }
         
+    }
+    void Attack2()
+    {
+        animator.SetTrigger("Attack2");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
 
+        }
 
     }
 
