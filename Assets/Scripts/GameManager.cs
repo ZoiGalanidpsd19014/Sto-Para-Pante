@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
                 {
                     myState = State.paused;
                     messagesTxt.text = "Paused : press P to continue";
+                    Time.timeScale = 0f;
                 }
 
                 break;
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
                     myState = State.playing;
-                    
+                    messagesTxt.text = "";
+                    Time.timeScale = 1f;
                    
                 }
                 break;
