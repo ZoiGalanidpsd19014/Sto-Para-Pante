@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
                     myState = State.playing;
+                    messagesTxt.text = "";
                     time = 30;
                 }
                 break;

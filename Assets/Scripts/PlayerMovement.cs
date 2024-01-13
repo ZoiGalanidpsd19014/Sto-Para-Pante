@@ -34,7 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSprite();
 
-        
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            isGrounded = false;
+            animator.SetBool("isJumping", !isGrounded);
+            jumpsLeft = maxJumps;
+        }
+
 
         if (Input.GetButtonDown("Jump") && jumpsLeft > 0)
         {
