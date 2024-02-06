@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            animator.SetBool("isDying", isDead);
             Die();
             Live();
         }
@@ -41,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
             Debug.Log("Player died");
-            animator.SetBool("isDying", isDead);
+            
         
             
     }

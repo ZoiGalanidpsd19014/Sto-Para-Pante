@@ -16,11 +16,7 @@ public class EnemyBehavior : MonoBehaviour {
    
 
     public GameObject sprite;
-    public void FlipSprite()
-    {
-        transform.localScale = new Vector2(sprite.transform.localScale.x * -1, sprite.transform.localScale.y);
-        
-    }
+    
     public void FlipThisSprite()
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);

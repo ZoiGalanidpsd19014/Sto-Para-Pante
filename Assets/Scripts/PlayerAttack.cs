@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask enemyLayers;
     public int attackDamage = 40;
     public int attackDamage2 = 60;
+    
 
     // Update is called once per frame
     void Update()
@@ -33,7 +34,9 @@ public class PlayerAttack : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
-           
+            Debug.Log("40 damage");
+
+
         }
         
     }
@@ -44,6 +47,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage2);
+            Debug.Log("60 damage");
 
         }
 
@@ -55,5 +59,6 @@ public class PlayerAttack : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    
 
 }

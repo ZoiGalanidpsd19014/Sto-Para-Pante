@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;
     public Vector3 respawnPoint;
     public GameObject fallDetector;
-
+    
 
     Rigidbody2D rb;
     public Animator animator;
@@ -88,14 +88,9 @@ public class PlayerMovement : MonoBehaviour
             transform.position = respawnPoint;
         }
 
-        if (collision.gameObject.tag == "collectable")
-        {
-            Destroy(collision.gameObject);
-            GameManager.instance.IncreaseScore(10);
-
-        }
-
+        
     }
+    
 }
 
 
