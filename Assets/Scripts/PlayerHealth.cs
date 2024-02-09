@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
+    public int lives;
     int currentHealth;
+    int currentLives;
     public Animator animator;
     bool isDead = true;
     public Vector3 respawnPoint;
@@ -13,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentLives = 3;
         animator = GetComponent<Animator>();
         
     }
@@ -35,6 +38,12 @@ public class PlayerHealth : MonoBehaviour
             animator.SetBool("isDying", isDead);
             Die();
             Live();
+            currentLives -= lives;
+            if (currentLives == 0)
+            {
+                Debug.Log("Game Over");
+                GameManager.instance.myState = GameManager.State.stopped;
+            }
         }
 
 
