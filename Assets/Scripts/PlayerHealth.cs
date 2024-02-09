@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        currentLives = 3;
+        lives = 3;
         animator = GetComponent<Animator>();
         
     }
