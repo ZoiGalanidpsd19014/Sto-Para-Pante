@@ -49,11 +49,13 @@ public class EnemyAttacking : MonoBehaviour
         if (Vector2.Distance( transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
         {
             currentPoint = pointA.transform;
-        }
+                    transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+                }
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
         {
             currentPoint = pointB.transform;
-        }
+                    transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+                }
                 if (Vector2.Distance(transform.position, player.position) < 20)
                 {
                     myState = State.attack;
