@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowBall : MonoBehaviour
+public class BackgroundFollow : MonoBehaviour
 {
-
-    public GameObject ballPrefab;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +13,6 @@ public class ThrowBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-            Instantiate(ballPrefab);
-
+        
     }
 }

@@ -1,68 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int lives;
-    int currentHealth;
-    int currentLives;
-    public Animator animator;
-    bool isDead = true;
+    public int maxHealth = 400;
+    public int currentHealth;
     public Vector3 respawnPoint;
-    // Start is called before the first frame update
+
     void Start()
     {
         currentHealth = maxHealth;
-        lives = 3;
-        animator = GetComponent<Animator>();
-        
+        respawnPoint = transform.position; // Set respawn point at the start
     }
 
-    // Update is called once per frame
-    
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        if (currentHealth > 0)
-        {
-            currentHealth -= damage;
-            Debug.Log("player took damage");
-
-
-        }
-
-
+        currentHealth -= damage;
+        Debug.Log("player took damage");
         if (currentHealth <= 0)
         {
-            animator.SetBool("isDying", isDead);
+            
             Die();
-            Live();
-            currentLives -= lives;
-            if (currentLives == 0)
-            {
-                Debug.Log("Game Over");
-                GameManager.instance.myState = GameManager.State.stopped;
-            }
         }
+        // Apply knockback here using the knockbackDirection
+        // ...
 
-
+        // You can reset the position to the respawn point when needed
+        // transform.position = respawnPoint;
     }
+
     void Die()
     {
-            Debug.Log("Player died");
-            
-        
-            
-    }
-
-    void Live()
-    {
-        animator.SetBool("isLiving", !isDead);
+        Debug.Log("Player died");
         transform.position = respawnPoint;
-        currentHealth = maxHealth;
-        Debug.Log("Full lives");
-        
-        
     }
 }

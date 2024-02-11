@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;
     public Vector3 respawnPoint;
     public GameObject fallDetector;
-    
 
     Rigidbody2D rb;
     public Animator animator;
@@ -42,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
             jumpsLeft = maxJumps;
         }
 
-
         if (Input.GetButtonDown("Jump") && jumpsLeft > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
@@ -51,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.position.y);
-
-
     }
 
     private void FixedUpdate()
@@ -62,9 +56,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
 
         if (GameManager.instance.myState != GameManager.State.playing) return;
-        Vector2 v = rb.velocity;
-        v.x = Input.GetAxis("Horizontal") * moveSpeed;
-        rb.velocity = v;
+        {
+            Vector2 v = rb.velocity;
+            v.x = Input.GetAxis("Horizontal") * moveSpeed;
+            rb.velocity = v;
+        }
+        
     }
 
     void FlipSprite()
@@ -87,12 +84,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = respawnPoint;
         }
-
-        
     }
-    
 }
-
-
-
-
